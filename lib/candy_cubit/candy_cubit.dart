@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
@@ -5,14 +6,19 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../models/candy.dart';
+import '../services/ticker.dart';
 
 part 'candy_state.dart';
 
 class CandyCubit extends Cubit<CandyState> {
-  CandyCubit() : super(const CandyState());
+  CandyCubit() : super(const CandyState(duration: _duration));
 
   final List<Candy> _candies = [];
   final Random _random = Random();
+  static const int _duration = 60;
+
+  final Ticker _ticker = const Ticker();
+  StreamSubscription<int>? _streamSubscription;
 
   int get numberOfCandies => _numberOfCandies;
   List<Color> get gameColors => _gameColors;
@@ -50,6 +56,16 @@ class CandyCubit extends Cubit<CandyState> {
         candiesSorted: _numberOfCandies - _candies.length,
       ),
     );
+    _startTimer(duration: _duration);
+  }
+
+  void _startTimer({required int duration}) {
+    _streamSubscription?.cancel();
+    _streamSubscription = _ticker.tick(ticks: duration).listen(
+          (duration) => emit(
+            state.copyWith(duration: duration),
+          ),
+        );
   }
 
   void onWrongChoice({required Size gameArea}) {
@@ -82,5 +98,11 @@ class CandyCubit extends Cubit<CandyState> {
         candiesSorted: _numberOfCandies - _candies.length,
       ),
     );
+  }
+
+  @override
+  Future<void> close() {
+    _streamSubscription?.cancel();
+    return super.close();
   }
 }

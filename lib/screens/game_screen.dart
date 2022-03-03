@@ -30,17 +30,27 @@ class GameScreen extends StatelessWidget {
             Scaffold(
               appBar: AppBar(
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                foregroundColor: Colors.black,
                 elevation: 0.0,
                 centerTitle: true,
                 title: ElevatedButton(
                   onPressed: () => newGame(candyCubit, context),
                   child: const Text('New Game'),
                 ),
+                leading: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BlocBuilder<CandyCubit, CandyState>(
+                    buildWhen: (previous, current) =>
+                        previous.duration != current.duration,
+                    builder: (context, state) {
+                      return Text('${state.duration}');
+                    },
+                  ),
+                ),
                 actions: [
                   IconButton(
                     onPressed: () => Navigator.pushNamed(context, settings),
                     icon: const Icon(Icons.settings),
-                    color: Colors.black,
                   ),
                 ],
               ),
