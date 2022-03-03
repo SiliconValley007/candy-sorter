@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<svg
+  id="Layer_1"
+  version="1.1"
+  viewBox="0 0 539.95233 958.61792"
+  xml:space="preserve"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  <g
+    transform="translate(-430.0261,-220.70184)"
+  >
+    <path
+      fill="#000000"
+      style="stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+      d="M708.57,441.96c-15.89-35.13-94.01-213.15-14.36-206.07l61.42,42.95l46.51-32.7l63.1,60.88l75.04-12.67   c0,0,71.13,99.71-99.42,190.82"
+    />
+    <path
+      fill="#000000"
+      style="stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+      class="st0"
+      d="M719.32,950.01c99.59,163.25-13.57,214.31-13.57,214.31l-58.51-48.67l-85.06,20.59l-23.77-51.65l-74.68,6.25   c-69.72-32.5,74.84-141.58,113.88-169.44"
+    />
+    <ellipse
+      fill="#000000"
+      style="stroke:#000000;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+      cx="706.34"
+      cy="699.27"
+      rx="272.26"
+      ry="161.99"
+      transform="matrix(0.2603 -0.9655 0.9655 0.2603 -152.6819 1199.2383)"
+    />
+  </g>
+</svg>
