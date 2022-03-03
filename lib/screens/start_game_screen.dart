@@ -3,47 +3,28 @@ import 'dart:math';
 import 'package:candy_sorter/locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../candy_cubit/candy_cubit.dart';
 import '../constants/constants.dart';
 import '../models/models.dart';
 import '../widgets/widgets.dart';
 
-class StartGameScreen extends StatefulWidget {
+class StartGameScreen extends HookWidget {
   const StartGameScreen({Key? key}) : super(key: key);
 
   static Route route() =>
       MaterialPageRoute<void>(builder: (_) => const StartGameScreen());
 
   @override
-  State<StartGameScreen> createState() => _StartGameScreenState();
-}
-
-class _StartGameScreenState extends State<StartGameScreen>
-    with SingleTickerProviderStateMixin {
-  late final Random _random;
-  late final AnimationController _animationController;
-  late final Animation<Offset> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _random = locator.get<Random>();
-    _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500))
-      ..repeat(reverse: true);
-    _animation = Tween<Offset>(begin: Offset.zero, end: const Offset(0.05, 0.08))
-        .animate(_animationController);
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final Random _random = locator.get<Random>();
+    final _animationController =
+        useAnimationController(duration: const Duration(milliseconds: 500))
+          ..repeat(reverse: true);
+    final Animation<Offset> _animation =
+        Tween<Offset>(begin: Offset.zero, end: const Offset(0.05, 0.08))
+            .animate(_animationController);
     final CandyCubit candyCubit = context.read<CandyCubit>();
     final Size _size = MediaQuery.of(context).size;
     return Scaffold(

@@ -12,13 +12,12 @@ import '../services/ticker.dart';
 part 'candy_state.dart';
 
 class CandyCubit extends Cubit<CandyState> {
-  CandyCubit() : super(const CandyState(duration: _duration));
+  CandyCubit() : super(const CandyState());
 
   final List<Candy> _candies = [];
   final Random _random = locator.get<Random>();
-  static const int _duration = 60;
 
-  final Ticker _ticker = const Ticker();
+  final Ticker _ticker = locator.get<Ticker>();
   StreamSubscription<int>? _streamSubscription;
 
   int get numberOfCandies => _numberOfCandies;
@@ -55,18 +54,34 @@ class CandyCubit extends Cubit<CandyState> {
         candies: _candies,
         candiesLeft: _candies.length,
         candiesSorted: _numberOfCandies - _candies.length,
+        isPaused: false,
+        isGameLost: false,
+        isGameWon: false,
+        duration: _candies.length + 10,
       ),
     );
-    _startTimer(duration: _duration);
+    _startTimer(duration: _candies.length + 10);
   }
 
   void _startTimer({required int duration}) {
     _streamSubscription?.cancel();
     _streamSubscription = _ticker.tick(ticks: duration).listen(
           (duration) => emit(
-            state.copyWith(duration: duration),
+            state.copyWith(
+                duration: duration,
+                isGameLost: duration == 0 && _candies.isNotEmpty),
           ),
         );
+  }
+
+  void pauseTimer() {
+    _streamSubscription?.pause();
+    emit(state.copyWith(isPaused: true));
+  }
+
+  void resumeTimer() {
+    _streamSubscription?.resume();
+    emit(state.copyWith(isPaused: false));
   }
 
   void onWrongChoice({required Size gameArea}) {
@@ -97,6 +112,7 @@ class CandyCubit extends Cubit<CandyState> {
         candies: _candies,
         candiesLeft: _candies.length,
         candiesSorted: _numberOfCandies - _candies.length,
+        isGameWon: _candies.isEmpty,
       ),
     );
   }

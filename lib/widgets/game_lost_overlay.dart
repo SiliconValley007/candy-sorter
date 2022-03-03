@@ -26,7 +26,9 @@ class GameLostOverlay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Lottie.asset(gameOverAnimation),
+            Lottie.asset(
+              gameOverAnimation,
+            ),
             ElevatedButton(
               onPressed: onButtonPressed,
               child: const Text('New Game'),

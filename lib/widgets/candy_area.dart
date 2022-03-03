@@ -17,7 +17,8 @@ class CandyArea extends StatelessWidget {
       builder: (context, constraints) => BlocBuilder<CandyCubit, CandyState>(
         buildWhen: (previous, current) =>
             previous.candiesLeft != current.candiesLeft ||
-            previous.candiesSorted != current.candiesSorted,
+            previous.candiesSorted != current.candiesSorted ||
+            previous.candies.length != current.candies.length,
         builder: (context, state) {
           return Stack(
             children: [
