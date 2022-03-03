@@ -1,7 +1,9 @@
 import 'dart:ui';
 
+import 'package:candy_sorter/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nil/nil.dart';
 
 import '../candy_cubit/candy_cubit.dart';
@@ -31,6 +33,7 @@ class GameScreen extends StatelessWidget {
           sigmaY: 3,
         ),
         child: Dialog(
+          insetAnimationDuration: const Duration(milliseconds: 900),
           backgroundColor: Colors.pinkAccent.withOpacity(0.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
@@ -39,47 +42,46 @@ class GameScreen extends StatelessWidget {
               width: 3,
             ),
           ),
-          child: SizedBox(
-            height: 200,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Game Paused',
-                    style: TextStyle(
-                      color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  'Game Paused',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                Lottie.asset(gamePausedAnimation),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        candyCubit.resumeTimer();
+                        Navigator.pop(context, true);
+                      },
+                      child: const Text('Resume Game'),
                     ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          candyCubit.resumeTimer();
-                          Navigator.pop(context, true);
-                        },
-                        child: const Text('Resume Game'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          candyCubit.fillCandies(
-                            gameArea: Size(
-                              MediaQuery.of(context).size.width,
-                              MediaQuery.of(context).size.height / 2,
-                            ),
-                          );
-                          Navigator.pop(context, true);
-                        },
-                        child: const Text('New Game'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ElevatedButton(
+                      onPressed: () {
+                        candyCubit.fillCandies(
+                          gameArea: Size(
+                            MediaQuery.of(context).size.width,
+                            MediaQuery.of(context).size.height / 2,
+                          ),
+                        );
+                        Navigator.pop(context, true);
+                      },
+                      child: const Text('New Game'),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

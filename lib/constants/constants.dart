@@ -1,8 +1,9 @@
 // assets
 const String bowlSvg = 'assets/bowl.svg';
 const String candySvg = 'assets/candy.svg';
-const String gameWonAnimation = 'assets/game-won.json';
 const String gameOverAnimation = 'assets/game-over.json';
+const String gamePausedAnimation = 'assets/game-paused.json';
+const String gameWonAnimation = 'assets/game-won.json';
 const String loadingAnimation = 'assets/loading-among-us.json';
 
 // routes
