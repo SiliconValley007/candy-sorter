@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:candy_sorter/locator/locator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class CandyCubit extends Cubit<CandyState> {
   CandyCubit() : super(const CandyState(duration: _duration));
 
   final List<Candy> _candies = [];
-  final Random _random = Random();
+  final Random _random = locator.get<Random>();
   static const int _duration = 60;
 
   final Ticker _ticker = const Ticker();

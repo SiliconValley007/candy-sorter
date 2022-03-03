@@ -10,8 +10,6 @@ class AppRouter {
         return StartGameScreen.route();
       case gameScreen:
         return GameScreen.route();
-      case settings:
-        return SettingsScreen.route();
       default:
         return StartGameScreen.route();
     }

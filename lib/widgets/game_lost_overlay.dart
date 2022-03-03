@@ -4,8 +4,8 @@ import 'package:candy_sorter/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class GameWonOverlay extends StatelessWidget {
-  const GameWonOverlay({Key? key, required this.onButtonPressed})
+class GameLostOverlay extends StatelessWidget {
+  const GameLostOverlay({Key? key, required this.onButtonPressed})
       : super(key: key);
 
   final VoidCallback onButtonPressed;
@@ -26,7 +26,7 @@ class GameWonOverlay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Lottie.asset(gameWonAnimation),
+            Lottie.asset(gameOverAnimation),
             ElevatedButton(
               onPressed: onButtonPressed,
               child: const Text('New Game'),

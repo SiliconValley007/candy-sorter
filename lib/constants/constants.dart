@@ -9,4 +9,3 @@ const String loadingAnimation = 'assets/loading-among-us.json';
 const String home = '/';
 const String startGame = '/start-game';
 const String gameScreen = '/game-screen';
-const String settings = '/settings';

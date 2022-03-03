@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:candy_sorter/locator/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +28,7 @@ class _StartGameScreenState extends State<StartGameScreen>
   @override
   void initState() {
     super.initState();
-    _random = Random();
+    _random = locator.get<Random>();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500))
       ..repeat(reverse: true);

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../candy_cubit/candy_cubit.dart';
-import '../constants/constants.dart';
+import '../widgets/game_lost_overlay.dart';
 import '../widgets/widgets.dart';
 
 class GameScreen extends StatelessWidget {
@@ -22,8 +22,8 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final CandyCubit candyCubit = context.read<CandyCubit>();
     return BlocBuilder<CandyCubit, CandyState>(
-      buildWhen: (previous, current) =>
-          current.candiesLeft == 0 || current.candiesSorted == 0,
+      buildWhen: (_, current) =>
+          current.candiesLeft == 0 || current.candiesSorted == 0 || current.duration == 0,
       builder: (context, state) {
         return Stack(
           children: [
@@ -49,7 +49,7 @@ class GameScreen extends StatelessWidget {
                 ),
                 actions: [
                   IconButton(
-                    onPressed: () => Navigator.pushNamed(context, settings),
+                    onPressed: () {},
                     icon: const Icon(Icons.settings),
                   ),
                 ],
@@ -91,6 +91,10 @@ class GameScreen extends StatelessWidget {
             ),
             if (state.candiesLeft == 0)
               GameWonOverlay(
+                onButtonPressed: () => newGame(candyCubit, context),
+              ),
+            if (state.duration == 0 && state.candiesLeft != 0)
+              GameLostOverlay(
                 onButtonPressed: () => newGame(candyCubit, context),
               ),
           ],
