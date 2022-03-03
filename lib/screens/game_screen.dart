@@ -25,15 +25,26 @@ class GameScreen extends StatelessWidget {
 
   Future<bool?> showPauseGameDialog(
       {required BuildContext context, required CandyCubit candyCubit}) {
-    return showDialog<bool>(
+    return showGeneralDialog<bool>(
       context: context,
-      builder: (context) => BackdropFilter(
+      barrierDismissible: true,
+      barrierLabel: '',
+      barrierColor: Colors.black54,
+      transitionDuration: const Duration(milliseconds: 500),
+      transitionBuilder: (context, animation1, animation2, child) {
+        final curvedValue =
+            Curves.easeInOutBack.transform(animation1.value) - 1.0;
+        return Transform(
+          transform: Matrix4.translationValues(0.0, curvedValue * 200, 0.0),
+          child: child,
+        );
+      },
+      pageBuilder: (context, animation1, animation2) => BackdropFilter(
         filter: ImageFilter.blur(
           sigmaX: 3,
           sigmaY: 3,
         ),
         child: Dialog(
-          insetAnimationDuration: const Duration(milliseconds: 900),
           backgroundColor: Colors.pinkAccent.withOpacity(0.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
