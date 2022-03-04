@@ -1,10 +1,5 @@
-import 'dart:developer';
-import 'dart:ui';
-
-import 'package:candy_sorter/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:nil/nil.dart';
 
 import '../candy_cubit/candy_cubit.dart';

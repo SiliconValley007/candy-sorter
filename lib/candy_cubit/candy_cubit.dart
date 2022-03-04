@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
@@ -25,6 +24,7 @@ class CandyCubit extends Cubit<CandyState> {
   final Ticker _ticker = locator.get<Ticker>();
   StreamSubscription<int>? _streamSubscription;
 
+  int get defaultNumberOfCandies => _defaultNumberOfCandies;
   int get numberOfCandies => _numberOfCandies;
   List<Color> get gameColors => _gameColors;
 
