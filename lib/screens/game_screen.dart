@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:candy_sorter/constants/constants.dart';
@@ -60,11 +61,35 @@ class GameScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  'Game Paused',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    const Text(
+                      'Game Paused',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, settingsScreen)
+                            .then((value) {
+                          if (value == true) {
+                            candyCubit.fillCandies(
+                              gameArea: Size(
+                                MediaQuery.of(context).size.width,
+                                MediaQuery.of(context).size.height / 2,
+                              ),
+                            );
+                            Navigator.pop(context, true);
+                          }
+                        });
+                      },
+                      icon: const Icon(Icons.settings),
+                    ),
+                  ],
                 ),
                 Lottie.asset(gamePausedAnimation),
                 Column(

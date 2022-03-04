@@ -5,6 +5,7 @@ class CandyState extends Equatable {
     this.candiesLeft = 0,
     this.candiesSorted = 0,
     this.duration = 0,
+    this.fillCandiesCalled = 0,
     this.isPaused = false,
     this.isGameLost = false,
     this.isGameWon = false,
@@ -14,6 +15,7 @@ class CandyState extends Equatable {
   final int candiesLeft;
   final int candiesSorted;
   final int duration;
+  final int fillCandiesCalled;
   final bool isGameWon;
   final bool isGameLost;
   final bool isPaused;
@@ -23,6 +25,7 @@ class CandyState extends Equatable {
   List<Object> get props => [
         candies,
         candiesLeft,
+        fillCandiesCalled,
         isPaused,
         isGameWon,
         isGameLost,
@@ -33,6 +36,7 @@ class CandyState extends Equatable {
   CandyState copyWith({
     int? candiesLeft,
     int? candiesSorted,
+    int? fillCandiesCalled,
     int? duration,
     bool? isPaused,
     bool? isGameWon,
@@ -42,6 +46,7 @@ class CandyState extends Equatable {
     return CandyState(
       candiesLeft: candiesLeft ?? this.candiesLeft,
       candiesSorted: candiesSorted ?? this.candiesSorted,
+      fillCandiesCalled: fillCandiesCalled ?? this.fillCandiesCalled,
       duration: duration ?? this.duration,
       isPaused: isPaused ?? this.isPaused,
       isGameWon: isGameWon ?? this.isGameWon,

@@ -18,7 +18,8 @@ class CandyArea extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.candiesLeft != current.candiesLeft ||
             previous.candiesSorted != current.candiesSorted ||
-            previous.candies.length != current.candies.length,
+            previous.candies.length != current.candies.length ||
+            previous.fillCandiesCalled != current.fillCandiesCalled,
         builder: (context, state) {
           return Stack(
             children: [

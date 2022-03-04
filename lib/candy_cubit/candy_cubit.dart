@@ -1,21 +1,26 @@
 import 'dart:async';
+import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
-import 'package:candy_sorter/locator/locator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
+import '../locator/locator.dart';
 import '../models/candy.dart';
-import '../services/ticker.dart';
+import '../services/services.dart';
 
 part 'candy_state.dart';
 
 class CandyCubit extends Cubit<CandyState> {
-  CandyCubit() : super(const CandyState());
+  CandyCubit() : super(const CandyState()) {
+    setupUserPreferences();
+  }
 
   final List<Candy> _candies = [];
   final Random _random = locator.get<Random>();
+
+  final GameService _gameService = locator.get<GameService>();
 
   final Ticker _ticker = locator.get<Ticker>();
   StreamSubscription<int>? _streamSubscription;
@@ -23,8 +28,12 @@ class CandyCubit extends Cubit<CandyState> {
   int get numberOfCandies => _numberOfCandies;
   List<Color> get gameColors => _gameColors;
 
+  int _fillCandiesCalled = 0;
+
+  int _defaultNumberOfCandies = 10;
+
   int _numberOfCandies = 10;
-  final List<Color> _gameColors = [
+  List<Color> _gameColors = [
     Colors.red,
     Colors.green,
     Colors.blueGrey,
@@ -32,13 +41,24 @@ class CandyCubit extends Cubit<CandyState> {
     Colors.orange,
   ];
 
+  void setupUserPreferences() async {
+    _defaultNumberOfCandies = await _gameService.getNumberOfCandies();
+    _gameColors = await _gameService.getListOfColors();
+  }
+
   set updateNumberOfCandies(int numberOfCandies) {
-    _numberOfCandies = numberOfCandies;
+    _defaultNumberOfCandies = numberOfCandies;
+    _gameService.saveNumberOfCandies(numberOfCandies: numberOfCandies);
+  }
+
+  set updateGameColors(List<Color> colors) {
+    _gameColors = colors;
+    _gameService.saveListOfColors(colors: colors);
   }
 
   void fillCandies({required Size gameArea}) {
     _candies.clear();
-    _numberOfCandies = 10;
+    _numberOfCandies = _defaultNumberOfCandies;
     for (int i = 0; i < _numberOfCandies; i++) {
       int nextIndex = _random.nextInt(_gameColors.length);
       _candies.add(
@@ -53,6 +73,7 @@ class CandyCubit extends Cubit<CandyState> {
       state.copyWith(
         candies: _candies,
         candiesLeft: _candies.length,
+        fillCandiesCalled: _fillCandiesCalled += 1,
         candiesSorted: _numberOfCandies - _candies.length,
         isPaused: false,
         isGameLost: false,

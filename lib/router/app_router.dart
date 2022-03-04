@@ -1,4 +1,5 @@
 import 'package:candy_sorter/constants/constants.dart';
+import 'package:candy_sorter/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/screens.dart';
@@ -10,6 +11,8 @@ class AppRouter {
         return StartGameScreen.route();
       case gameScreen:
         return GameScreen.route();
+      case settingsScreen:
+        return SettingsScreen.route();
       default:
         return StartGameScreen.route();
     }
