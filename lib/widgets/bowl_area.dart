@@ -37,7 +37,10 @@ class BowlArea extends StatelessWidget {
                   if (candy.color == _shuffledColors[i]) {
                     candyCubit.removeCandy(candy);
                   } else {
-                    showSnackBar(context);
+                    showSnackBar(
+                      context,
+                      text: '!!! Wrong bowl !!!',
+                    );
                     candyCubit.onWrongChoice(
                       gameArea: Size(
                         MediaQuery.of(context).size.width,

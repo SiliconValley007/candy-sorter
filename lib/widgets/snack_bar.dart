@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
-void showSnackBar(BuildContext context) {
+void showSnackBar(
+  BuildContext context, {
+  required String text,
+  Duration duration = const Duration(milliseconds: 500),
+}) {
   final snackBar = SnackBar(
-    duration: const Duration(milliseconds: 500),
+    duration: duration,
     backgroundColor: Colors.transparent,
     elevation: 0,
     content: Container(
@@ -21,13 +25,13 @@ void showSnackBar(BuildContext context) {
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
-        children: const [
-          Icon(Icons.cancel, color: Colors.red),
+        children: [
+          const Icon(Icons.cancel, color: Colors.red),
           Padding(
-            padding: EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 8.0),
             child: Text(
-              '!!! Wrong bowl !!!',
-              style: TextStyle(color: Colors.red),
+              text,
+              style: const TextStyle(color: Colors.red),
             ),
           ),
         ],

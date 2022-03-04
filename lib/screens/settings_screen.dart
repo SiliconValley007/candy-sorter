@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -10,6 +12,24 @@ class SettingsScreen extends HookWidget {
 
   static Route route() =>
       MaterialPageRoute<void>(builder: (_) => const SettingsScreen());
+
+  void checkUpdateColor({
+    required BuildContext context,
+    required Color checkColor,
+    required CandyCubit candyCubit,
+    required ValueNotifier<Color> colorValue,
+  }) {
+    if (candyCubit.gameColors.contains(checkColor)) {
+      Navigator.pop(context);
+      showSnackBar(
+        context,
+        text: 'Already chosen',
+        duration: const Duration(seconds: 1),
+      );
+    } else {
+      colorValue.value = checkColor;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +52,7 @@ class SettingsScreen extends HookWidget {
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             Row(
               children: [
@@ -45,46 +66,71 @@ class SettingsScreen extends HookWidget {
               ],
             ),
             const SizedBox(height: 24.0),
-            PickColor(
+            _PickColor(
               text: 'Color 1',
               color: color1.value,
-              onColorChanged: (color) => color1.value = color,
+              onColorChanged: (color) => checkUpdateColor(
+                context: context,
+                checkColor: Color(color.value),
+                candyCubit: candyCubit,
+                colorValue: color1,
+              ),
               onPressedSelect: () {
                 Navigator.pop(context);
               },
             ),
             const SizedBox(height: 12.0),
-            PickColor(
+            _PickColor(
               text: 'Color 2',
               color: color2.value,
-              onColorChanged: (color) => color2.value = color,
+              onColorChanged: (color) => checkUpdateColor(
+                context: context,
+                checkColor: Color(color.value),
+                candyCubit: candyCubit,
+                colorValue: color2,
+              ),
               onPressedSelect: () {
                 Navigator.pop(context);
               },
             ),
             const SizedBox(height: 12.0),
-            PickColor(
+            _PickColor(
               text: 'Color 3',
               color: color3.value,
-              onColorChanged: (color) => color3.value = color,
+              onColorChanged: (color) => checkUpdateColor(
+                context: context,
+                checkColor: Color(color.value),
+                candyCubit: candyCubit,
+                colorValue: color3,
+              ),
               onPressedSelect: () {
                 Navigator.pop(context);
               },
             ),
             const SizedBox(height: 12.0),
-            PickColor(
+            _PickColor(
               text: 'Color 4',
               color: color4.value,
-              onColorChanged: (color) => color4.value = color,
+              onColorChanged: (color) => checkUpdateColor(
+                context: context,
+                checkColor: Color(color.value),
+                candyCubit: candyCubit,
+                colorValue: color4,
+              ),
               onPressedSelect: () {
                 Navigator.pop(context);
               },
             ),
             const SizedBox(height: 12.0),
-            PickColor(
+            _PickColor(
               text: 'Color 5',
               color: color5.value,
-              onColorChanged: (color) => color5.value = color,
+              onColorChanged: (color) => checkUpdateColor(
+                context: context,
+                checkColor: Color(color.value),
+                candyCubit: candyCubit,
+                colorValue: color5,
+              ),
               onPressedSelect: () {
                 Navigator.pop(context);
               },
@@ -115,8 +161,8 @@ class SettingsScreen extends HookWidget {
   }
 }
 
-class PickColor extends StatelessWidget {
-  const PickColor({
+class _PickColor extends StatelessWidget {
+  const _PickColor({
     Key? key,
     required this.text,
     required this.color,
@@ -134,14 +180,15 @@ class PickColor extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(text),
+        Text(
+          text,
+        ),
         GestureDetector(
           onTap: () => pickColor(
-            context: context,
-            pickerColor: color,
-            onColorChanged: onColorChanged,
-            onPressedSelect: onPressedSelect,
-          ),
+              context: context,
+              pickerColor: color,
+              onColorChanged: onColorChanged,
+              onPressedSelect: onPressedSelect),
           child: CircleAvatar(
             backgroundColor: color,
           ),
