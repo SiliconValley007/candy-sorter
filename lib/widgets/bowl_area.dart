@@ -18,21 +18,23 @@ class BowlArea extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.fillCandiesCalled != current.fillCandiesCalled,
       builder: (context, state) {
+        final List<Color> _shuffledColors = candyCubit.gameColors;
+        _shuffledColors.shuffle();
         return Wrap(
           alignment: WrapAlignment.spaceEvenly,
           runAlignment: WrapAlignment.spaceEvenly,
           children: [
-            for (int i = 0; i < candyCubit.gameColors.length; i++)
+            for (int i = 0; i < _shuffledColors.length; i++)
               DragTarget<Candy>(
                 builder: (context, candidateData, rejectedData) => Bowl(
-                  color: candyCubit.gameColors[i],
+                  color: _shuffledColors[i],
                 ),
                 onWillAccept: (candy) {
                   //return candy?.color == candyCubit.gameColors[i];
                   return candy != null;
                 },
                 onAccept: (candy) {
-                  if (candy.color == candyCubit.gameColors[i]) {
+                  if (candy.color == _shuffledColors[i]) {
                     candyCubit.removeCandy(candy);
                   } else {
                     showSnackBar(context);
