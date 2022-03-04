@@ -23,7 +23,9 @@ class CandySorter extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Candy Sorter',
         theme: ThemeData(
-          textTheme: GoogleFonts.pressStart2pTextTheme(),
+          textTheme: GoogleFonts.pressStart2pTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
         onGenerateRoute: AppRouter.onGenerateRoute,
         home: const StartGameScreen(),

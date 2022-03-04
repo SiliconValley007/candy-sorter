@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.candy_sorter">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="candy_sorter"
         android:name="${applicationName}"
