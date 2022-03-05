@@ -1,3 +1,5 @@
+/// barrel file to export all the files inside the widgets folder
+
 export 'bowl_area.dart';
 export 'bowl.dart';
 export 'candy_area.dart';

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../models/candy.dart';
 import 'widgets.dart';
 
+/// candy widget to display the candy svg with the corresponding color
 class CandyWidget extends StatelessWidget {
   const CandyWidget({
     Key? key,
@@ -16,6 +17,7 @@ class CandyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// custom widget which returns the svg provided with the provided color
     return ColoredSvg(
       path: candySvg,
       color: candy.color,

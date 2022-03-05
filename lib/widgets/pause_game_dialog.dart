@@ -14,6 +14,7 @@ Future<bool?> showPauseGameDialog(
     barrierLabel: '',
     barrierColor: Colors.black54,
     transitionDuration: const Duration(milliseconds: 500),
+    /// custom transition builder to customize the push and pop animation of the dialog
     transitionBuilder: (context, animation1, animation2, child) {
       final curvedValue =
           Curves.easeInOutBack.transform(animation1.value) - 1.0;
@@ -22,6 +23,7 @@ Future<bool?> showPauseGameDialog(
         child: child,
       );
     },
+    /// widget will blur the background
     pageBuilder: (context, animation1, animation2) => BackdropFilter(
       filter: ImageFilter.blur(
         sigmaX: 3,
@@ -58,6 +60,7 @@ Future<bool?> showPauseGameDialog(
                     onPressed: () {
                       Navigator.pushNamed(context, settingsScreen)
                           .then((value) {
+                            /// true will be returned from the settingsScreen when user has changed the game properties
                         if (value == true) {
                           candyCubit.fillCandies(
                             gameArea: Size(
@@ -65,6 +68,7 @@ Future<bool?> showPauseGameDialog(
                               MediaQuery.of(context).size.height / 2,
                             ),
                           );
+                          /// close the dialog
                           Navigator.pop(context, true);
                         }
                       });
@@ -81,6 +85,7 @@ Future<bool?> showPauseGameDialog(
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      /// resume the game timer and close the dialog
                       candyCubit.resumeTimer();
                       Navigator.pop(context, true);
                     },
@@ -88,6 +93,7 @@ Future<bool?> showPauseGameDialog(
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      /// create a new game and close the dialog
                       candyCubit.fillCandies(
                         gameArea: Size(
                           MediaQuery.of(context).size.width,

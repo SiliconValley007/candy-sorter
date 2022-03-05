@@ -17,6 +17,7 @@ class GameWonOverlay extends StatelessWidget {
       height: _size.height,
       width: _size.width,
       color: Colors.black.withOpacity(0.8),
+      /// blur the background
       child: BackdropFilter(
         filter: ImageFilter.blur(
           sigmaX: 3,

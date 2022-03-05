@@ -3,6 +3,7 @@ import 'package:candy_sorter/constants/constants.dart';
 import 'widgets.dart';
 import 'package:flutter/material.dart';
 
+/// widget to display the bowl.svg with the corresponding color
 class Bowl extends StatelessWidget {
   const Bowl({
     Key? key,
@@ -17,6 +18,7 @@ class Bowl extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
+      /// custom widget which returns the svg provided with the provided color
       child: ColoredSvg(
         path: bowlSvg,
         color: color,

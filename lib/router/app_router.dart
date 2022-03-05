@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/screens.dart';
 
+/// AppRouter class to handle our MaterialApp navigation
 class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// custom snackbar, displayed when the user chooses a wrong bowl or selects a color that already has been occupied
 void showSnackBar(
   BuildContext context, {
   required String text,
