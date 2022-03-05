@@ -34,10 +34,10 @@ class SettingsScreen extends HookWidget {
     final CandyCubit candyCubit = context.read<CandyCubit>();
     final candyCount = useValueNotifier<int>(candyCubit.defaultNumberOfCandies);
     final color1 = useValueNotifier<Color>(candyCubit.gameColors[0]);
-    final color2 = useState<Color>(candyCubit.gameColors[1]);
-    final color3 = useState<Color>(candyCubit.gameColors[2]);
-    final color4 = useState<Color>(candyCubit.gameColors[3]);
-    final color5 = useState<Color>(candyCubit.gameColors[4]);
+    final color2 = useValueNotifier<Color>(candyCubit.gameColors[1]);
+    final color3 = useValueNotifier<Color>(candyCubit.gameColors[2]);
+    final color4 = useValueNotifier<Color>(candyCubit.gameColors[3]);
+    final color5 = useValueNotifier<Color>(candyCubit.gameColors[4]);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
