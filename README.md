@@ -1,7 +1,7 @@
 # candy_sorter
 
 A candy sorter game made with Flutter for the march flutter challenge.
-https://flutterchallenge.dev/lets-eat-some-candies
+<https://flutterchallenge.dev/lets-eat-some-candies>
 
 ![start-game](https://user-images.githubusercontent.com/63968451/156754231-5d742d7d-8eaa-4b0b-9d69-eea07055a826.jpg)
 Starting screen
